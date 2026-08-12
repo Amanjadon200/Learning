@@ -38,6 +38,35 @@ latency or take down the entire API."
 
 
 
-"How will you scale your distributed rate limiter?"
-we can use redis cluster for hadling state so keys are will be distributed across cluster.We can also expire
-inactive as well by using TTL.
+Q3 "How will you scale your distributed rate limiter?"
+we can use redis cluster for hadling state so keys are will be distributed across cluster.
+We can also expire inactive keys as well by setting TTL.
+
+
+Q4 Mutex lock:
+Mutual exclusion lock can be implemented by three strategies, 
+1: Synchronized 
+2. Reetrantlock
+3. semaphore
+
+static class Mutex{
+    private Lock lock=new Reetrantlock();
+    int counter=0;
+        public void increment(){
+            lock.lock();
+            try{
+                counter++;
+            }
+            finally(){
+                lock.unlock();
+            }
+        }  
+}
+Mutex.increment();
+
+
+Q5 ReetrantReadWritelock
+
+ReetrantReadWritelock : this lock is advance in providing the Synchronization when multiple thread 
+can read the data when no write lock is there.
+when some thread holds write lock no thread can read.
