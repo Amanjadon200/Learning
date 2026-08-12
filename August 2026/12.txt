@@ -1,0 +1,22 @@
+Q1  if consumer processes a messaage and beofre commting an offset it crashed ,what would happend
+and how we can handle duplicate processing.
+
+Answer: Kafka would do rebalancing and some other consumer will pick form the last commited message
+so it would pick this message as well but we make sure that comsumer operation should be idempotent
+for this we can make some unique id for tha message so if that id is already present in Db we can 
+skip that opertaion if some thing is already done dont do it again or we can wrap that in a
+transaction before commiting an offset it should commit transaction only.
+DB transaction
+    ↓
+process business operation
+    ↓
+DB commit
+    ↓
+Kafka offset commit
+Then if it crashes after DB commit but before Kafka offset commit:
+
+DB commit ✅
+Kafka offset ❌
+
+The message gets processed again, but because the DB operation is idempotent, duplicate processing 
+doesn't cause a duplicate business effect.
