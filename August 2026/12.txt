@@ -20,3 +20,24 @@ Kafka offset ❌
 
 The message gets processed again, but because the DB operation is idempotent, duplicate processing 
 doesn't cause a duplicate business effect.
+
+
+Q2 How would you reduce latency if api has n number of downstream calls
+
+Like we can use async library to call these calls simultaneous like in node js we have promise.all[] 
+if sequence does not matter for these calls
+
+or
+
+"First, I'd identify dependencies between the downstream calls. For independent calls, I'd execute them 
+concurrently instead of sequentially, which reduces latency from roughly the sum of all call latencies
+to the latency of the slowest call. In Node.js I can use Promise.all(). For dependent calls,
+I'd maintain the required ordering. I'd also add timeouts, caching, and appropriate fallback 
+behavior so that one slow or failing downstream service doesn't unnecessarily increase the 
+latency or take down the entire API."
+
+
+
+"How will you scale your distributed rate limiter?"
+we can use redis cluster for hadling state so keys are will be distributed across cluster.We can also expire
+inactive as well by using TTL.
