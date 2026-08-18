@@ -63,7 +63,7 @@ static class Mutex{
         }  
 }
 Mutex.increment();
-
+The lock applies to the code between lock.lock() and lock.unlock() by convention/design.
 
 Q5 ReetrantReadWritelock
 
