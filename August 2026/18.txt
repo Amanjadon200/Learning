@@ -8,3 +8,23 @@ stream.on('data',(chunks)=>{
     chunks -> buffer of hexadecimal (1 hexadecimal number is of 1 byte)
     console.log(chunks.toString());
 })
+
+call back hell
+function abc(userid,callback){
+callback('error',null)
+}
+abc(12,(err,data)=>{
+    console.log(data,err);
+    if(err){
+        console.log('error is there');
+    }
+    else{
+        abcd(12,(err,data)=>{
+            console.log(data,err);
+        })
+    }
+})
+function abcd(id,callback){
+    // do something
+    callback('error',null)
+}
