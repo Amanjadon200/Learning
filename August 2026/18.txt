@@ -1,0 +1,10 @@
+1. how streams used in node js 
+
+const fs=require('fs');
+const stream = fs.createReadStream('abc.txt',{
+    highWaterMark:5
+})
+stream.on('data',(chunks)=>{
+    chunks -> buffer of hexadecimal (1 hexadecimal number is of 1 byte)
+    console.log(chunks.toString());
+})
