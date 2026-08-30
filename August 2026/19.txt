@@ -1,0 +1,26 @@
+1.About V8
+
+JavaScript source code
+        ↓
+      Parsing
+        ↓
+       AST
+        ↓
+   Bytecode / execution
+        ↓
+Optimization
+        ↓
+Machine code
+        ↓
+      CPU
+
+
+
+Node.js watch(), it is used to watch files/directories for changes.
+
+The most common one is:
+
+fs.watch()
+fs.watch('abc.txt',(eventType,fileName)=>{
+
+})

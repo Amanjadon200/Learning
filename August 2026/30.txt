@@ -1,0 +1,24 @@
+for threads we can create thread executor pool custom i mean in which we can set core size threads 
+and max size of pool and you cna maintain some Datastructure ex: linkedBlockingQueue it has some capacity whihc you even can set.
+
+
+example:
+
+class Task implememts Runnable{
+    // overide 
+    public void run(){
+        Sout('hi aman',id);
+    }
+}
+class Main{
+    psvm{
+
+        ThreadPoolExecutor pool=new ThreadPoolExecutor(
+            2,4,60,nnew linkedBlockingQueue()
+        );
+        for(int i=0;i<10;i++){
+            Task task=new Task();
+            pool.execute(task);
+        }
+    }
+}
