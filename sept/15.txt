@@ -1,0 +1,31 @@
+Thread life cycle:
+
+New :  when you just instantiate 
+Thread t= new Thread(()-> sout("thread running"));
+
+it means no resource is allocated to thread
+
+this t is just an object 
+
+when we call start
+
+t.start()
+resource allocated to this real thread and internally it calls run method of task
+so thread constructor wants runnable and if you provide directly lambda function it thought that
+ this lambda function can become implementation of functional Runnable interface run function
+
+
+--1
+Runnable r= new Runnable(){
+    public void run(){
+        sout("thread is runnning")
+    }
+}
+--2
+== 
+
+Runnable r=()->{
+sout("thread is runnning")
+}
+
+1 and 2 are same
