@@ -1,0 +1,35 @@
+             Java object
+                 │
+                 ├── Intrinsic monitor 🔒
+                 │       │
+                 │       ├── synchronized
+                 │       ├── wait()
+                 │       ├── notify()
+                 │       └── notifyAll()
+                 │
+                 └── Can ALSO be used as a normal object
+
+
+                vs
+
+
+                 ReentrantLock object
+        │
+        ├── Intrinsic monitor 🔒
+        │      └── synchronized(lock)
+        │
+        └── ReentrantLock mechanism 🔒
+               ├── lock()
+               ├── unlock()
+               └── Condition.await()/signal()
+
+
+
+
+
+               the intrinsic monitor is the synchronization mechanism used by synchronized. 👍
+
+
+
+
+you can not restart the treminated thread

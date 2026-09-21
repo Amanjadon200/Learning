@@ -1,0 +1,87 @@
+wait can only be called while holding the lock (else you will get IllegalMonitorStateException )
+vs sleep can be called anytime .
+
+
+
+T1                         T2
+
+wait()
+  ↓
+releases lock 🔓
+                           ↓
+                      gets lock 🔒
+                           ↓
+                       notify()
+                           ↓
+                     continues...
+                           ↓
+                    exits synchronized
+                           ↓
+                       releases 🔓
+  ↓
+T1 can reacquire lock
+  ↓
+continues after wait()
+
+
+
+| Feature                      | `sleep()`                | `wait()`                                         |
+| ---------------------------- | ------------------------ | ------------------------------------------------ |
+| Belongs to                   | `Thread`                 | `Object`                                         |
+| Releases lock?               | ❌ No                     | ✅ Yes                                            |
+| Used for                     | Delaying execution       | Thread communication                             |
+| Must be inside synchronized? | ❌ No                     | ✅ Yes, when using object monitor                 |
+| How does it wake?            | Time expires / interrupt | `notify()`, `notifyAll()`, interrupt, or timeout |
+| Thread state                 | `TIMED_WAITING`          | `WAITING` / `TIMED_WAITING`                      |
+| Lock retained?               | ✅ Yes                    | ❌ No                                             |
+
+
+Example:
+class Test {
+
+    synchronized void method() {
+
+        System.out.println("Entered");
+
+        try {
+            Thread.sleep(5000);
+        } catch (Exception e) {}
+
+        System.out.println("Done");
+    }
+}
+
+Thread A comes:
+
+it acquires the lock for 5 sec if in between Thread B came it will in blocked state.
+
+
+
+| Intrinsic monitor | Explicit lock           |
+| ----------------- | ----------------------- |
+| `synchronized`    | `ReentrantLock.lock()`  |
+| `wait()`          | `Condition.await()`     |
+| `notify()`        | `Condition.signal()`    |
+| `notifyAll()`     | `Condition.signalAll()` |
+
+
+
+multiple locks hold by one single thread using reetran tlock
+
+lock1.lock();
+
+try {
+
+    lock2.lock();
+
+    try {
+
+        System.out.println("Holding both locks");
+
+    } finally {
+        lock2.unlock();
+    }
+
+} finally {
+    lock1.unlock();
+}
