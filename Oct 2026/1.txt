@@ -1,0 +1,77 @@
+
+const user = {
+    name: "Aman"
+};
+
+user.self = user;
+console.log(JSON.parse(JSON.stringify(user))); // Type
+
+
+/*
+
+The code snippet you provided creates a circular reference in the `user` object by assigning `user.self` to reference the `user` object itself. When you attempt to stringify this object using `JSON.stringify`, it will throw a `TypeError` because JSON cannot represent circular references.
+*/
+// we cna use structuredClone to clone the object without throwing an error, but it will not preserve the circular reference. Here's how you can do it:
+const clonedUser = structuredClone(user);
+console.log(clonedUser); // { name: "Aman", self: [Circular] } but without the circular reference
+
+
+
+
+
+// here also stringifying an object with a Map will not preserve the Map structure, as JSON does not support Maps. When you stringify the `user` object that contains a Map, it will convert the Map to an empty object `{}`.
+// but stucturedClone will preserve the Map structure. Here's an example:
+const user = {
+    name: "Aman",
+    birthDate: new Date(),
+    scores: new Map([
+        ["DSA", 100]
+    ])
+};
+console.log(JSON.parse(JSON.stringify(user)),user); // Type
+// const clonedUser = structuredClone(user);
+// console.log(clonedUser); // { name: "Aman", self: [Circular] } but without the circular reference
+
+
+// Response
+
+// { name: 'Aman', birthDate: '2026-10-01T10:22:23.364Z', scores: {} }
+// PS C:\Users\hp\OneDrive\Desktop\PersonalProjects\AmanPay-node-backend> node a.js
+// { name: 'Aman', birthDate: '2026-10-01T10:22:34.821Z', scores: {} } {
+//   name: 'Aman',
+//   birthDate: 2026-10-01T10:22:34.821Z,
+//   scores: Map(1) { 'DSA' => 100 }
+// }
+
+
+
+what is prototype inheritance
+
+let say we have an object 
+function Animal(name){
+    this.name=name;
+}
+Animal.prototype.eat=function(){
+    console.log(this.name , "is eating")
+}
+Animal a=new Animal();
+a
+│
+│ [[Prototype]]
+▼
+Animal.prototype
+│
+├── eat()
+└── constructor → Animal
+Every function is an object and it has prototype property as well which other object when 
+inherits it extends through this super object prototype only
+
+like
+const a1= new Animal("DOg")
+fucntion Dog(name){
+    Animal(name);
+}
+Dog d1=new Dog("Labrador");
+d.[[Prototype]]
+Dog.prototype=Object.create(Animal.prototype);
+Dog.prototype.constructor=Dog;
