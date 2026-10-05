@@ -1,0 +1,2 @@
+ main thread v8 is different that worker thread v8 tjhats why if we pass object from main thread to worker thread 
+ it will structurally clone rather than passing reference.
