@@ -1,0 +1,8 @@
+1. clustering means add node process on same machine for maximum utilization of cpu cores . 
+
+
+
+2. kubernetes/pm2 i s also used to manage process on multiple machines
+
+3. clustering is capability of node js and pm2 is used to monitor those processs and provides more 
+supervision on process like providn g logs ,restart capabilities etc
